@@ -1,0 +1,25 @@
+name: Test tap
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tap local repo
+        run: brew tap hapticasensorics/tap "$PWD"
+      - name: Audit formula
+        run: brew audit --new --strict hapticasensorics/tap/onecontext || true
+      - name: Install formula
+        run: brew install hapticasensorics/tap/1context
+      - name: Test formula
+        run: brew test hapticasensorics/tap/onecontext
+      - name: Smoke test
+        run: |
+          1context --version
+          1context doctor
+          1context paths
