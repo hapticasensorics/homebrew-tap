@@ -1,5 +1,5 @@
 class Onecontext < Formula
-  desc "Own your context. An engine for agentic work"
+  desc "Own your context. A memory engine for agentic work"
   homepage "https://github.com/hapticasensorics/1context"
   url "https://github.com/hapticasensorics/1context/archive/refs/tags/v0.1.0.tar.gz"
   sha256 "2f28b0ac9e99ea8d24c568a19a0375662f3bea2575c4f771ddb3ae298de2aec4"
