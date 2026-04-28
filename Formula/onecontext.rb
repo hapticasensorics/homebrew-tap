@@ -1,8 +1,8 @@
 class Onecontext < Formula
-  desc "1Context cross-agent memory plumbing"
+  desc "Own your context. An engine for agentic work."
   homepage "https://github.com/hapticasensorics/1context"
   url "https://github.com/hapticasensorics/1context/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "cbb5e9977bf0f6dbb30805ecf55490b0c257db1a27f18c8fb132a92a42e0a4c5"
+  sha256 "1ed1e2c55a4011e0764c7dad538ac739b80a960a598505695d444bd553ac666b"
   license "Apache-2.0"
 
   def install
