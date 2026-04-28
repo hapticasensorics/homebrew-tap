@@ -20,6 +20,6 @@ jobs:
         run: brew test hapticasensorics/tap/onecontext
       - name: Smoke test
         run: |
+          1context
           1context --version
-          1context doctor
-          1context paths
+          1context --help
