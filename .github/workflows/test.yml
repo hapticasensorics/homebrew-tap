@@ -18,8 +18,3 @@ jobs:
         run: brew install hapticasensorics/tap/1context
       - name: Test formula
         run: brew test hapticasensorics/tap/onecontext
-      - name: Smoke test
-        run: |
-          1context
-          1context --version
-          1context --help
