@@ -7,7 +7,6 @@ cask "1context" do
   desc "Agentic context engine for local project memory"
   homepage "https://haptica.ai/"
 
-  conflicts_with formula: "hapticasensorics/tap/onecontext"
   depends_on arch: :arm64
 
   app "1Context.app"
