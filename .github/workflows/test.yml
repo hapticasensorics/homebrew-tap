@@ -12,9 +12,13 @@ jobs:
       - uses: actions/checkout@v6
       - name: Tap local repo
         run: brew tap hapticasensorics/tap "$PWD"
-      - name: Audit formula
-        run: brew audit --new --strict hapticasensorics/tap/onecontext || true
-      - name: Install formula
-        run: brew install hapticasensorics/tap/1context
-      - name: Test formula
-        run: brew test hapticasensorics/tap/onecontext
+      - name: Audit cask
+        run: brew audit --cask --new hapticasensorics/tap/1context || true
+      - name: Install cask
+        run: brew install --cask hapticasensorics/tap/1context
+      - name: Smoke test
+        run: |
+          1context --version
+          1context status --debug || true
+      - name: Uninstall cask
+        run: brew uninstall --cask --zap hapticasensorics/tap/1context

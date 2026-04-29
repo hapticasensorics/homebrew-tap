@@ -1,5 +1,5 @@
 # Haptica Homebrew Tap
 
 ```bash
-brew install hapticasensorics/tap/1context
+brew install --cask hapticasensorics/tap/1context
 ```
