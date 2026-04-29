@@ -1,17 +1,18 @@
 cask "1context" do
-  version "0.1.8"
-  sha256 "ab9abf0012a25218a97fcf244def1d83364c207ab6179050f514c6939c0f4e34"
+  version "0.1.10"
+  sha256 "54c5722cd1fa5be01e271336c5fbbea652808c7f79677ab3c336434fb4cc4e0a"
 
-  url "https://github.com/hapticasensorics/1context/releases/download/v#{version}/1context-#{version}-macos-arm64.tar.gz"
+  url "https://github.com/hapticasensorics/1context/releases/download/v#{version}/1context-#{version}-macos-arm64.tar.gz",
+      verified: "github.com/hapticasensorics/1context/"
   name "1Context"
   desc "Agentic context engine for local project memory"
   homepage "https://haptica.ai/"
 
   depends_on arch: :arm64
+  depends_on macos: ">= :ventura"
 
   app "1context-#{version}-macos-arm64/1Context.app"
   binary "#{appdir}/1Context.app/Contents/MacOS/1context-cli", target: "1context"
-  binary "#{appdir}/1Context.app/Contents/MacOS/onecontextd", target: "onecontextd"
 
   postflight do
     system_command "/bin/bash",
@@ -35,9 +36,11 @@ cask "1context" do
   end
 
   zap trash: [
-    "~/.config/1context",
+    "~/1Context",
     "~/Library/Application Support/1Context",
+    "~/Library/Caches/1Context",
     "~/Library/Logs/1Context",
+    "~/Library/Preferences/com.haptica.1context.plist",
   ]
 
   caveats <<~EOS
@@ -49,7 +52,7 @@ cask "1context" do
     To remove 1Context but keep local data:
       brew uninstall --cask hapticasensorics/tap/1context
 
-    To remove local data too:
+    To remove user content and local data too:
       brew uninstall --cask --zap hapticasensorics/tap/1context
   EOS
 end
