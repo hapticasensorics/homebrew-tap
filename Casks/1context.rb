@@ -24,11 +24,27 @@ cask "1context" do
                    ]
   end
 
-  uninstall launchctl: [
-              "com.haptica.1context.menu",
-              "com.haptica.1context",
-            ],
-            quit:      "com.haptica.1context.menu"
+  uninstall_preflight do
+    uid = Process.uid
+    labels = [
+      "com.haptica.1context.menu",
+      "com.haptica.1context",
+    ]
+
+    system_command "/usr/bin/osascript",
+                   args:         ["-e", "tell application id \"com.haptica.1context.menu\" to quit"],
+                   must_succeed: false
+
+    labels.each do |label|
+      plist = File.expand_path("~/Library/LaunchAgents/#{label}.plist")
+      system_command "/bin/launchctl",
+                     args:         ["bootout", "gui/#{uid}/#{label}"],
+                     must_succeed: false
+      system_command "/bin/launchctl",
+                     args:         ["bootout", "gui/#{uid}", plist],
+                     must_succeed: false
+    end
+  end
 
   uninstall_postflight do
     FileUtils.rm_f File.expand_path("~/Library/LaunchAgents/com.haptica.1context.menu.plist")

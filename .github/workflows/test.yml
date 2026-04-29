@@ -29,6 +29,8 @@ jobs:
           ! grep -R "REPLACE_WITH_SHA256" Casks
           test ! -e Formula
           test ! -e Aliases
+      - name: Check cask lifecycle
+        run: ./scripts/test-cask-lifecycle-static.sh
       - name: Tap local repo
         run: brew tap hapticasensorics/tap "$PWD"
       - name: Audit cask
