@@ -31,6 +31,11 @@ cask "1context" do
       "com.haptica.1context",
     ]
 
+    system_command "#{appdir}/1Context.app/Contents/MacOS/1context-cli",
+                   args:         ["agent", "integrations", "uninstall"],
+                   must_succeed: false,
+                   print_stderr: false
+
     system_command "/usr/bin/osascript",
                    args:         ["-e", "tell application id \"com.haptica.1context.menu\" to quit"],
                    must_succeed: false,
