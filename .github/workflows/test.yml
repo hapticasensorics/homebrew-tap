@@ -8,6 +8,8 @@ on:
 jobs:
   test:
     runs-on: macos-latest
+    env:
+      HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v6
       - name: Check cask surface
@@ -18,7 +20,7 @@ jobs:
       - name: Tap local repo
         run: brew tap hapticasensorics/tap "$PWD"
       - name: Audit cask
-        run: brew audit --cask --new hapticasensorics/tap/1context || true
+        run: brew audit --cask --strict --online hapticasensorics/tap/1context
       - name: Install cask
         run: brew install --cask hapticasensorics/tap/1context
       - name: Smoke test
