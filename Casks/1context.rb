@@ -10,8 +10,8 @@ cask "1context" do
   depends_on arch: :arm64
 
   app "1context-#{version}-macos-arm64/1Context.app"
-  binary "1context-#{version}-macos-arm64/bin/1context", target: "1context"
-  binary "1context-#{version}-macos-arm64/bin/onecontextd", target: "onecontextd"
+  binary "#{appdir}/1Context.app/Contents/MacOS/1context-cli", target: "1context"
+  binary "#{appdir}/1Context.app/Contents/MacOS/onecontextd", target: "onecontextd"
 
   postflight do
     system_command "/bin/bash",
