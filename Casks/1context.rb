@@ -10,6 +10,8 @@ cask "1context" do
 
   depends_on arch: :arm64
   depends_on macos: ">= :ventura"
+  depends_on formula: "uv"
+  depends_on formula: "node"
 
   app "1context-#{version}-macos-arm64/1Context.app"
   binary "#{appdir}/1Context.app/Contents/MacOS/1context-cli", target: "1context"
