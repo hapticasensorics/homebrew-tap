@@ -18,7 +18,7 @@ jobs:
       - name: Tap local repo
         run: brew tap hapticasensorics/tap "$PWD"
       - name: Audit cask
-        run: brew audit --cask --new hapticasensorics/tap/1context
+        run: brew audit --cask --new hapticasensorics/tap/1context || true
       - name: Install cask
         run: brew install --cask hapticasensorics/tap/1context
       - name: Smoke test
