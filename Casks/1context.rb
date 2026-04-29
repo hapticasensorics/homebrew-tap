@@ -39,8 +39,17 @@ cask "1context" do
     "~/1Context",
     "~/Library/Application Support/1Context",
     "~/Library/Caches/1Context",
+    "~/Library/Caches/com.haptica.1context.menu",
+    "~/Library/HTTPStorages/1context",
+    "~/Library/HTTPStorages/1context.binarycookies",
+    "~/Library/HTTPStorages/com.haptica.1context.menu",
+    "~/Library/HTTPStorages/com.haptica.1context.menu.binarycookies",
     "~/Library/Logs/1Context",
     "~/Library/Preferences/com.haptica.1context.plist",
+    "~/Library/Saved Application State/com.haptica.1context.menu.savedState",
+    "~/Library/WebKit/com.haptica.1context.menu",
+    "/private/var/folders/*/*/*/T/1context-*.command",
+    "/private/var/folders/*/*/*/T/1context-update-*",
   ]
 
   caveats <<~EOS
