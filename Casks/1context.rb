@@ -20,7 +20,7 @@ cask "1context" do
                      "-c",
                      "#{staged_path}/1context-#{version}-macos-arm64/scripts/install-macos-launch-agents.sh " \
                      "#{appdir}/1Context.app " \
-                     "#{appdir}/1Context.app/Contents/MacOS/1context-cli || true",
+                     "#{appdir}/1Context.app/Contents/MacOS/1context-cli",
                    ]
   end
 
