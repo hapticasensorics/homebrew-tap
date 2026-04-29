@@ -5,13 +5,25 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: tap-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: macos-14
+    timeout-minutes: 15
     env:
       HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v6
+      - name: Tool versions
+        run: |
+          brew --version
+          sw_vers
       - name: Check cask surface
         run: |
           ! grep -R "REPLACE_WITH_SHA256" Casks
@@ -26,6 +38,6 @@ jobs:
       - name: Smoke test
         run: |
           1context --version
-          1context status --debug || true
+          1context status --debug
       - name: Uninstall cask
         run: brew uninstall --cask --zap hapticasensorics/tap/1context
