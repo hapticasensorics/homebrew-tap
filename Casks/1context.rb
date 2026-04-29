@@ -27,11 +27,12 @@ cask "1context" do
               "com.haptica.1context",
               "com.haptica.1context.menu",
             ],
-            quit:      "com.haptica.1context.menu",
-            delete:    [
-              "~/Library/LaunchAgents/com.haptica.1context.menu.plist",
-              "~/Library/LaunchAgents/com.haptica.1context.plist",
-            ]
+            quit:      "com.haptica.1context.menu"
+
+  uninstall_postflight do
+    FileUtils.rm_f File.expand_path("~/Library/LaunchAgents/com.haptica.1context.menu.plist")
+    FileUtils.rm_f File.expand_path("~/Library/LaunchAgents/com.haptica.1context.plist")
+  end
 
   zap trash: [
     "~/.config/1context",
