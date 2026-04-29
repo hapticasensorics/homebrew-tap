@@ -25,8 +25,8 @@ cask "1context" do
   end
 
   uninstall launchctl: [
-              "com.haptica.1context",
               "com.haptica.1context.menu",
+              "com.haptica.1context",
             ],
             quit:      "com.haptica.1context.menu"
 
