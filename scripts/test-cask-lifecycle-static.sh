@@ -13,6 +13,7 @@ fi
 grep -q 'uninstall_preflight do' "$CASK"
 grep -q 'gui/#{uid}/#{label}' "$CASK"
 grep -q '/bin/launchctl' "$CASK"
+grep -q 'print_stderr: false' "$CASK"
 grep -q 'com.haptica.1context.menu' "$CASK"
 grep -q 'com.haptica.1context' "$CASK"
 

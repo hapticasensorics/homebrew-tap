@@ -33,16 +33,19 @@ cask "1context" do
 
     system_command "/usr/bin/osascript",
                    args:         ["-e", "tell application id \"com.haptica.1context.menu\" to quit"],
-                   must_succeed: false
+                   must_succeed: false,
+                   print_stderr: false
 
     labels.each do |label|
       plist = File.expand_path("~/Library/LaunchAgents/#{label}.plist")
       system_command "/bin/launchctl",
                      args:         ["bootout", "gui/#{uid}/#{label}"],
-                     must_succeed: false
+                     must_succeed: false,
+                     print_stderr: false
       system_command "/bin/launchctl",
                      args:         ["bootout", "gui/#{uid}", plist],
-                     must_succeed: false
+                     must_succeed: false,
+                     print_stderr: false
     end
   end
 
