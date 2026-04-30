@@ -1,6 +1,6 @@
 cask "1context" do
   version "0.1.48"
-  sha256 "8933786d43053198ccc17617080d6aca429a6965cb27895efed414f7accaa607"
+  sha256 "f4ddc765e65796af962398bd787a6c8a0b3b78e9c0e17c6150d0228458267fad"
 
   url "https://github.com/hapticasensorics/1context/releases/download/v#{version}/1context-#{version}-macos-arm64.tar.gz",
       verified: "github.com/hapticasensorics/1context/"
