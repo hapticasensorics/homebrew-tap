@@ -43,3 +43,5 @@ jobs:
           1context status --debug
       - name: Uninstall cask
         run: brew uninstall --cask --zap hapticasensorics/tap/1context
+      - name: Upgrade from previous public cask
+        run: ./scripts/test-cask-upgrade-path.sh

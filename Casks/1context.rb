@@ -1,42 +1,48 @@
 cask "1context" do
-  version "0.1.49"
-  sha256 "2ad824f9382807c0adf580ea244231a111ef79137086850b835182cc2d0b8e05"
+  version "0.1.50"
+  sha256 "7276967ec90cb104c345c1a25b5bbecdf445912d6b984552b49f7de3205bfcb9"
 
-  url "https://github.com/hapticasensorics/1context/releases/download/v#{version}/1context-#{version}-macos-arm64.tar.gz",
+  url "https://github.com/hapticasensorics/1context/releases/download/v#{version}/1Context-#{version}-macos-arm64.dmg",
       verified: "github.com/hapticasensorics/1context/"
   name "1Context"
   desc "Agentic context engine for local project memory"
   homepage "https://haptica.ai/"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  auto_updates true
   depends_on arch: :arm64
   depends_on macos: ">= :ventura"
   depends_on formula: "uv"
   depends_on formula: "node"
 
-  app "1context-#{version}-macos-arm64/1Context.app"
+  app "1Context.app"
   binary "#{appdir}/1Context.app/Contents/MacOS/1context-cli", target: "1context"
 
   postflight do
-    system_command "/bin/bash",
-                   args: [
-                     "-c",
-                     "#{staged_path}/1context-#{version}-macos-arm64/scripts/install-macos-launch-agents.sh " \
-                     "#{appdir}/1Context.app " \
-                     "#{appdir}/1Context.app/Contents/MacOS/1context-cli",
-                   ]
+    system_command "/usr/bin/open",
+                   args:         ["#{appdir}/1Context.app"],
+                   must_succeed: false,
+                   print_stderr: false
   end
 
   uninstall_preflight do
+    cli = "#{appdir}/1Context.app/Contents/MacOS/1context-cli"
+    if File.executable?(cli)
+      system_command cli,
+                     args:         ["uninstall", "--keep-app"],
+                     must_succeed: false,
+                     print_stderr: false
+    end
+
     uid = Process.uid
     labels = [
       "com.haptica.1context.menu",
       "com.haptica.1context",
     ]
-
-    system_command "#{appdir}/1Context.app/Contents/MacOS/1context-cli",
-                   args:         ["agent", "integrations", "uninstall"],
-                   must_succeed: false,
-                   print_stderr: false
 
     system_command "/usr/bin/osascript",
                    args:         ["-e", "tell application id \"com.haptica.1context.menu\" to quit"],
@@ -57,11 +63,13 @@ cask "1context" do
   end
 
   uninstall_postflight do
-    FileUtils.rm_f File.expand_path("~/Library/LaunchAgents/com.haptica.1context.menu.plist")
-    FileUtils.rm_f File.expand_path("~/Library/LaunchAgents/com.haptica.1context.plist")
+    rm File.expand_path("~/Library/LaunchAgents/com.haptica.1context.menu.plist")
+    rm File.expand_path("~/Library/LaunchAgents/com.haptica.1context.plist")
   end
 
   zap trash: [
+    "/private/var/folders/*/*/*/T/1context-*.command",
+    "/private/var/folders/*/*/*/T/1context-update-*",
     "~/1Context",
     "~/Library/Application Support/1Context",
     "~/Library/Caches/1Context",
@@ -74,12 +82,12 @@ cask "1context" do
     "~/Library/Preferences/com.haptica.1context.plist",
     "~/Library/Saved Application State/com.haptica.1context.menu.savedState",
     "~/Library/WebKit/com.haptica.1context.menu",
-    "/private/var/folders/*/*/*/T/1context-*.command",
-    "/private/var/folders/*/*/*/T/1context-update-*",
   ]
 
   caveats <<~EOS
-    1Context installs a menu bar app and local runtime.
+    1Context installs the same signed app used by the direct DMG download.
+    The app starts after install and opens setup when local wiki access still
+    needs permission.
 
     To stop 1Context:
       1context stop

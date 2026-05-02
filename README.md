@@ -6,7 +6,12 @@ macOS public preview for 1Context.
 brew install --cask hapticasensorics/tap/1context
 ```
 
-Requires Apple Silicon and macOS 13 Ventura or newer.
+The cask installs the same signed and notarized `1Context.app` distributed in
+the direct DMG release. The app launches after install, moves into the normal
+menu bar flow, and uses Sparkle for app-owned updates.
+
+Requires Apple Silicon and macOS 13 Ventura or newer. The preview runtime also
+uses `uv` and `node`, which Homebrew installs as cask dependencies.
 
 ```bash
 brew uninstall --cask hapticasensorics/tap/1context
